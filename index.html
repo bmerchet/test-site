@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello — Bienvenue</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0b0b12;
+      --text: #f8f8ff;
+      --muted: #a5a5b5;
+      --accent: #8b5cf6;
+      --accent-2: #ec4899;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      overflow-x: hidden;
+    }
+
+    /* Background */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: .25;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    body::before {
+      top: -180px;
+      left: -120px;
+      background: #7c3aed;
+    }
+
+    body::after {
+      right: -180px;
+      bottom: -200px;
+      background: #db2777;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navigation */
+    nav {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 28px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -.04em;
+    }
+
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 8px 30px rgba(139, 92, 246, .35);
+    }
+
+    .nav-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+      transition: color .2s ease;
+    }
+
+    .nav-link:hover {
+      color: white;
+    }
+
+    /* Hero */
+    main {
+      flex: 1;
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      padding: 70px 0 110px;
+    }
+
+    .hero {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 13px;
+      margin-bottom: 25px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 999px;
+      background: rgba(255,255,255,.045);
+      color: #d7d7e2;
+      font-size: .78rem;
+      backdrop-filter: blur(12px);
+    }
+
+    .status {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 12px #4ade80;
+    }
+
+    h1 {
+      max-width: 720px;
+      font-size: clamp(4rem, 9vw, 8.5rem);
+      line-height: .83;
+      letter-spacing: -.085em;
+      font-weight: 900;
+    }
+
+    h1 span {
+      display: block;
+      background: linear-gradient(
+        100deg,
+        #fff 10%,
+        #c4b5fd 48%,
+        #f9a8d4 90%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .description {
+      max-width: 530px;
+      margin-top: 30px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.7;
+    }
+
+    .actions {
+      display: flex;
+      gap: 14px;
+      margin-top: 38px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 22px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .92rem;
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+    }
+
+    .button-primary {
+      color: white;
+      background: linear-gradient(135deg, #8b5cf6, #ec4899);
+      box-shadow: 0 14px 35px rgba(139, 92, 246, .25);
+    }
+
+    .button-primary:hover {
+      box-shadow: 0 18px 45px rgba(139, 92, 246, .4);
+    }
+
+    .button-secondary {
+      color: #dddde8;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.04);
+    }
+
+    .button-secondary:hover {
+      background: rgba(255,255,255,.08);
+    }
+
+    /* Visual */
+    .visual {
+      position: relative;
+      height: 440px;
+      display: grid;
+      place-items: center;
+    }
+
+    .orb {
+      position: absolute;
+      width: 310px;
+      height: 310px;
+      border-radius: 50%;
+      background:
+        radial-gradient(
+          circle at 30% 25%,
+          #f5d0fe 0%,
+          #c084fc 18%,
+          #7c3aed 43%,
+          #312e81 72%,
+          transparent 73%
+        );
+      filter: blur(.2px);
+      box-shadow:
+        0 0 80px rgba(139,92,246,.4),
+        0 0 180px rgba(236,72,153,.2);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .orb::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.28);
+      background: linear-gradient(
+        135deg,
+        rgba(255,255,255,.22),
+        transparent 45%
+      );
+    }
+
+    .orb::after {
+      content: "";
+      position: absolute;
+      width: 100px;
+      height: 45px;
+      top: 45px;
+      left: 70px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.28);
+      filter: blur(18px);
+      transform: rotate(-25deg);
+    }
+
+    .card {
+      position: absolute;
+      width: 205px;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 20px;
+      background: rgba(20, 20, 31, .62);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 25px 60px rgba(0,0,0,.35);
+    }
+
+    .card.one {
+      top: 35px;
+      right: 0;
+      transform: rotate(5deg);
+      animation: cardOne 7s ease-in-out infinite;
+    }
+
+    .card.two {
+      bottom: 35px;
+      left: 0;
+      transform: rotate(-6deg);
+      animation: cardTwo 7s ease-in-out infinite;
+    }
+
+    .card-icon {
+      width: 35px;
+      height: 35px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 14px;
+      background: rgba(255,255,255,.08);
+      font-size: 1rem;
+    }
+
+    .card strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: .9rem;
+    }
+
+    .card small {
+      color: #898999;
+      font-size: .74rem;
+      line-height: 1.4;
+    }
+
+    /* Footer */
+    footer {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 22px 0 28px;
+      border-top: 1px solid rgba(255,255,255,.07);
+      display: flex;
+      justify-content: space-between;
+      color: #686878;
+      font-size: .75rem;
+    }
+
+    /* Animations */
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-18px) rotate(4deg);
+      }
+    }
+
+    @keyframes cardOne {
+      0%, 100% {
+        transform: translateY(0) rotate(5deg);
+      }
+      50% {
+        transform: translateY(-12px) rotate(7deg);
+      }
+    }
+
+    @keyframes cardTwo {
+      0%, 100% {
+        transform: translateY(0) rotate(-6deg);
+      }
+      50% {
+        transform: translateY(10px) rotate(-3deg);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      nav {
+        padding-top: 20px;
+      }
+
+      main {
+        padding: 50px 0 80px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      h1 {
+        font-size: clamp(4rem, 20vw, 7rem);
+      }
+
+      .visual {
+        height: 350px;
+      }
+
+      .orb {
+        width: 240px;
+        height: 240px;
+      }
+
+      .card.one {
+        right: 5%;
+      }
+
+      .card.two {
+        left: 5%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav,
+      main,
+      footer {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .description {
+        font-size: 1rem;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .visual {
+        transform: scale(.88);
+        margin: -20px 0;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <nav>
+      <div class="logo">
+        <div class="logo-mark">✦</div>
+        Hello
+      </div>
+
+      <a class="nav-link" href="#start">
+        Commencer →
+      </a>
+    </nav>
+
+    <main id="start">
+      <section class="hero">
+
+        <div class="content">
+          <div class="eyebrow">
+            <span class="status"></span>
+            Bienvenue sur votre nouvelle page
+          </div>
+
+          <h1>
+            Hello<span>World.</span>
+          </h1>
+
+          <p class="description">
+            Une page d'accueil minimaliste, élégante et entièrement
+            autonome. Aucun framework, aucune librairie, aucune dépendance.
+            Juste du HTML et du CSS.
+          </p>
+
+          <div class="actions">
+            <a href="#discover" class="button button-primary">
+              Découvrir
+            </a>
+
+            <a href="#about" class="button button-secondary">
+              En savoir plus
+            </a>
+          </div>
+        </div>
+
+        <div class="visual" aria-hidden="true">
+          <div class="orb"></div>
+
+          <div class="card one">
+            <div class="card-icon">⚡</div>
+            <strong>Simple & rapide</strong>
+            <small>
+              Un seul fichier. Zéro dépendance externe.
+            </small>
+          </div>
+
+          <div class="card two">
+            <div class="card-icon">✦</div>
+            <strong>100% autonome</strong>
+            <small>
+              Fonctionne même sans connexion Internet.
+            </small>
+          </div>
+        </div>
+
+      </section>
+    </main>
+
+    <footer>
+      <span>© 2026 Hello</span>
+      <span>Made with HTML & CSS</span>
+    </footer>
+
+  </div>
+</body>
+</html>
