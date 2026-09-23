@@ -334,7 +334,7 @@
 	  const base_url = window.location.href
   		.replace(/^https?:\/\//, '')
   		.replace(/\/$/, '');
-	  ans= await resolver.query('ssh.'+ base_url , 'CNAME')
+	  const ans= await resolver.query('ssh.'+ base_url , 'CNAME')
 	   if (ans.answers.length) {
 		window.location.href='http://' + ans.answers[0].data
 	   }
