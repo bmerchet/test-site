@@ -330,13 +330,11 @@
     </section>
   </main>
   <script type="module">
-	  const resolver = new doh.DohResolver('https://1.1.1.1/dns-query')
-	  const base_url = window.location.href
-  		.replace(/^https?:\/\//, '')
-  		.replace(/\/$/, '');
-	  const ans= await resolver.query('www.'+ base_url , 'CNAME')
+	const resolver = new doh.DohResolver('https://1.1.1.1/dns-query')
+	const url=new URL(window.location.href);
+	const ans= await resolver.query('www.'+ url.host , 'CNAME')
 	   if (ans.answers.length) {
-		window.location.href='http://' + ans.answers[0].data
+		window.location.href='http://' + ans.answers[0].data + url.pathname
 	   }
   </script>
 </body>
